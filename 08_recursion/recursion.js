@@ -28,12 +28,17 @@ function fib(n)
 
 var type = function(param)
 {
-	var test = new Object;
-	return test.toString.call(param).match(/\s([a-zA-Z]+)/)[1];
+	// var test = new Object;
+	// instead of creating a new object, call the method directly from the Object.prototype using .call
+	return Object.prototype.toString.call(param).match(/\s([a-zA-Z]+)/)[1];
+	// return test.toString.call(param).match(/\s([a-zA-Z]+)/)[1];
 }
 
 var stringify = function(param)
 {
+	// refactor to only call the "type" functon 1x instead of multiple times. ex:
+	
+	var valueType = type(param); // now use this variable wherever you were calling type()
 	if (!(type(param)=="Array" || type(param)=="Objects"))
 	{
 		if (type(param)=="String")
@@ -53,5 +58,7 @@ var stringify = function(param)
 		}
 		
 	}
+	
+	// What about a case for Object literals?
 }	
 		
